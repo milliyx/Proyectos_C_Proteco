@@ -22,25 +22,24 @@ int main()
         if (strcmp(opc, "ayuda") == 0)
         {
             vercomandos();
-            printf("\n..."); // Coloca aquí las instrucciones específicas
+            printf("\n\n\n"); // Coloca aquí las instrucciones específicas
         }
         else if (strcmp(opc, "salir") == 0)
         {
-            // Mostrar instrucciones para el comando "salir"
             break; // Termina el bucle
         }
         else if (strcmp(opc, "n") == 0)
         {
-            // Mostrar el tamaño actual del arreglo
+        
+           // Mostrar el tamaño actual del arreglo
             printf("\nEl tamaño actual del arreglo es: %d\n", tamaño);
-
             char opc2;
-            printf("¿Deseas cambiar la cantidad de datos? (S/N): ");
+            printf("¿Deseas cambiar la cantidad de datos? (Y/N): ");
             scanf(" %c", &opc2);
 
             int num;
 
-            if (opc2 == 'S' || opc2 == 's')
+            if (opc2 == 'Y' || opc2 == 'y')
             {
                 printf("Ingrese el nuevo tamaño del arreglo (máximo 100): ");
                 scanf("%d", &num);
@@ -65,13 +64,6 @@ int main()
                 printf("Dato [%d]: ", i); // Imprimir la posición del dato
                 scanf("%f", &arreglo[i]);
             }
-
-            // Imprimir los nuevos elementos ingresados
-            printf("Los nuevos elementos del arreglo son:\n");
-            for (int i = 0; i < tamaño; i++)
-            {
-                printf("Dato[%d]: %f \n", i,arreglo[i]);
-            }
         }
         else if (strcmp(opc, "cambiar") == 0)
         {
@@ -81,17 +73,33 @@ int main()
         else if (strcmp(opc, "imprimir") == 0)
         {
             // Salir del programa si el usuario ingresa "imprimir"
-            printf("\nInstrucciones para el comando 'imprimir':\n");
+            printf("Los nuevos elementos del arreglo son:\n");
+            for (int i = 0; i < tamaño; i++)
+            {
+                printf("Dato[%d]: %f \n", i, arreglo[i]);
+            }
         }
         else if (strcmp(opc, "media") == 0)
         {
             // Salir del programa si el usuario ingresa "media"
-            printf("\nInstrucciones para el comando 'media':\n");
+            if (tamaño == 0)
+            {
+                printf("El tamaño del arreglo es 0. Ingrese datos primero.\n");
+            }
+            else
+            {
+                float suma = 0;
+                for (int i = 0; i < tamaño; i++)
+                {
+                    suma += arreglo[i];
+                }
+                float media = suma / tamaño;
+                printf("La media de los datos en el arreglo es: %.2f\n", media);
+            }
         }
         else if (strcmp(opc, "mediana") == 0)
         {
             // Salir del programa si el usuario ingresa "mediana"
-            printf("\nInstrucciones para el comando 'mediana':\n");
         }
         else if (strcmp(opc, "moda") == 0)
         {

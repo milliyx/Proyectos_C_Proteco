@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include "funciones.h"
 
+ /*   char opc[100];
+    float arreglo[100];
+    int tamaño = sizeof(arreglo) / sizeof(arreglo[0]);
+/*
 /*int cambiar_n(int i);
 void llenar(float datos[], int n);
 void imprimir(float datos[], int n);
@@ -37,3 +41,30 @@ void vercomandos(){
     printf("\n\t|    rango    | Calcular el rango del conjunto de datos.                          |\t");
     printf("\n\t|    todos    | Calcular todas las medidas del sobre el conjunto de datos.        |\t");
 }
+/*
+int cambiar_n(int i){
+
+           // Mostrar el tamaño actual del arreglo
+            printf("\nEl tamaño actual del arreglo es: %d\n", tamaño);
+            char opc2;
+            printf("¿Deseas cambiar la cantidad de datos? (Y/N): ");
+            scanf(" %c", &opc2);
+
+            int num;
+
+            if (opc2 == 'Y' || opc2 == 'y')
+            {
+                printf("Ingrese el nuevo tamaño del arreglo (máximo 100): ");
+                scanf("%d", &num);
+
+                if (num > 100 || num < 0)
+                {
+                    printf("Tamaño de arreglo no válido.\n");
+                    return 1; // Salir del programa con error
+                }
+
+                printf("El nuevo tamaño del arreglo es: %d\n", num);
+                tamaño = num;
+            }
+}
+*/

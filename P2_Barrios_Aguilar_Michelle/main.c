@@ -2,7 +2,71 @@
 #include <string.h>
 #include <stdlib.h>
 #include "funciones.h"
+#include <math.h>
 
+// Función para ordenar un arreglo en orden ascendente (utilizando el algoritmo de burbuja)
+void ordenarArreglo(float arreglo[], int tamaño)
+{
+    for (int i = 0; i < tamaño - 1; i++)
+    {
+        for (int j = 0; j < tamaño - i - 1; j++)
+        {
+            if (arreglo[j] > arreglo[j + 1])
+            {
+                // Intercambiar los elementos si están en el orden incorrecto
+                float temp = arreglo[j];
+                arreglo[j] = arreglo[j + 1];
+                arreglo[j + 1] = temp;
+            }
+        }
+    }
+}
+// Función para calcular la moda de un arreglo
+void calcularModa(float arreglo[], int tamaño)
+{
+    int frecuencias[tamaño]; // Arreglo para almacenar las frecuencias
+    for (int i = 0; i < tamaño; i++)
+    {
+        frecuencias[i] = 0; // Inicializar todas las frecuencias a 0
+    }
+
+    // Calcular las frecuencias de cada valor
+    for (int i = 0; i < tamaño; i++)
+    {
+        int frecuenciaActual = 1; // Inicializar la frecuencia actual a 1
+        for (int j = i + 1; j < tamaño; j++)
+        {
+            if (arreglo[i] == arreglo[j])
+            {
+                frecuenciaActual++; // Incrementar la frecuencia si se encuentra un valor igual
+            }
+        }
+        frecuencias[i] = frecuenciaActual;
+    }
+
+    // Encontrar el valor o valores con la frecuencia máxima
+    int maxFrecuencia = 0;
+    for (int i = 0; i < tamaño; i++)
+    {
+        if (frecuencias[i] > maxFrecuencia)
+        {
+            maxFrecuencia = frecuencias[i];
+        }
+    }
+
+    // Imprimir los valores que tienen la frecuencia máxima (la moda)
+    printf("La moda del arreglo es/son:\n");
+    for (int i = 0; i < tamaño; i++)
+    {
+        if (frecuencias[i] == maxFrecuencia)
+        {
+            printf("%.2f ", arreglo[i]);
+        }
+    }
+    printf("\n");
+}
+/// @brief
+/// @return
 int main()
 {
     printf("INSTRUCCIONES: Cuando aparezca '>' puedes teclear cualquiera de los siguientes comandos que se muestran en la siguiente tabla.\n");
@@ -30,8 +94,8 @@ int main()
         }
         else if (strcmp(opc, "n") == 0)
         {
-        
-           // Mostrar el tamaño actual del arreglo
+
+            // Mostrar el tamaño actual del arreglo
             printf("\nEl tamaño actual del arreglo es: %d\n", tamaño);
             char opc2;
             printf("¿Deseas cambiar la cantidad de datos? (Y/N): ");
@@ -100,21 +164,69 @@ int main()
         else if (strcmp(opc, "mediana") == 0)
         {
             // Salir del programa si el usuario ingresa "mediana"
+            if (tamaño == 0)
+            {
+                printf("El tamaño del arreglo es 0. Ingrese datos primero.\n");
+            }
+            else
+            {
+                // Ordenar el arreglo en orden ascendente
+                ordenarArreglo(arreglo, tamaño);
+
+                float mediana;
+                if (tamaño % 2 == 0)
+                {
+                    // Si la cantidad de datos es par, calcular el promedio de los dos valores centrales
+                    int indice1 = tamaño / 2 - 1;
+                    int indice2 = tamaño / 2;
+                    mediana = (arreglo[indice1] + arreglo[indice2]) / 2.0;
+                }
+                else
+                {
+                    // Si la cantidad de datos es impar, el valor central es la mediana
+                    int indice = tamaño / 2;
+                    mediana = arreglo[indice];
+                }
+
+                printf("La mediana de los datos en el arreglo es: %.2f\n", mediana);
+            }
         }
         else if (strcmp(opc, "moda") == 0)
         {
             // Salir del programa si el usuario ingresa "moda"
             printf("\nInstrucciones para el comando 'moda':\n");
+            if (tamaño == 0)
+            {
+                printf("El tamaño del arreglo es 0. Ingrese datos primero.\n");
+            }
+            else
+            {
+                calcularModa(arreglo, tamaño);
+            }
         }
         else if (strcmp(opc, "varianza") == 0)
         {
             // Salir del programa si el usuario ingresa "varianza"
             printf("\nInstrucciones para el comando 'varianza':\n");
+            // Calcular la suma de cuadrados de las diferencias (SSD)
+            float ssd = 0;
+            for (int i = 0; i < tamaño; i++)
+            {
+                float diferencia = arreglo[i] - media;
+                ssd += diferencia * diferencia;
+            }
+
+            // Calcular la varianza
+            float varianza = ssd / (tamaño - 1);
+
+            printf("La varianza es: %.2f\n", varianza);
         }
         else if (strcmp(opc, "desvest") == 0)
         {
             // Salir del programa si el usuario ingresa "desvest"
-            printf("\nInstrucciones para el comando 'desvest':\n");
+            float desviacion_estandar = sqrt(varianza);
+
+            printf("La desviación estándar es: %.2f\n", desviación_estandar);
         }
         else if (strcmp(opc, "cuartil_1") == 0)
         {
@@ -149,4 +261,3 @@ int main()
     }
 
     return 0;
-}
